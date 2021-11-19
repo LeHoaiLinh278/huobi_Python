@@ -372,3 +372,8 @@ account_client = AccountClient(api_key=g_api_key,
 account_client.sub_account_update(AccountBalanceMode.TOTAL, callback)
 ```
 
+### Installation
+
+```
+    sudo python3 setup.py install
+```
