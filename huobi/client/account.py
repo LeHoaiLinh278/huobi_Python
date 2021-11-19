@@ -77,6 +77,8 @@ class AccountClient(object):
         accounts = self.get_accounts()
         account_balance_list = []
         account_balance_json_map = {}
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
         for account_item in accounts:
             account_obj_map[account_item.id] = account_item
             balance_params = {"account-id": account_item.id}
@@ -85,7 +87,7 @@ class AccountClient(object):
             tasks.append(asyncio.ensure_future(
                 self.async_get_account_balance(balance_url, account_item.id, account_balance_json_map)))
 
-        loop = asyncio.get_event_loop()
+        # loop = asyncio.get_event_loop()
         try:
             loop.run_until_complete(asyncio.wait(tasks))
         except Exception as ee:
